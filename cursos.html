@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+    <title>Cadastro de Cursos</title>
+</head>
+<body>
+    <header> 
+    <div class="logo-titulo">
+        <img class=logo src="img/logo.png" alt="Instituto Federal Catarinense">
+        <h1> Gestão Acadêmica</h1>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="index.html">Página principal</a></li>
+            <li><a href="professores.html">Cadastro de Professores</a></li>
+        </ul>
+    </nav>
+</header>
+
+    <main>
+        <button id="addCurso">Adicionar Curso</button>
+          <table id="cursosTable">
+            <thead>
+              <tr>
+                <th>Nome do Curso</th>
+                <th>Sigla</th>
+                <th>Descrição</th>
+                <th>Coordenador</th>
+              </tr>
+            </thead>
+           <tbody>
+             <!-- Cursos serão inseridos aqui via JavaScript -->
+            </tbody>
+          </table>
+      </main>
+
+      <!-- Modal para Adicionar/Editar Curso -->
+<div id="cursoModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Adicionar/Editar Curso</h2>
+      <form id="cursoForm">
+        <!-- <input type="hidden" id="cursoId" name="cursoId" required> -->
+        <input type="hidden"  style="display:none" id="codigo" name="codigo" required>
+        <label for="nomeCurso">Nome do Curso:</label>
+        <input type="text" id="nomeCurso" name="nomeCurso" required>
+        <label for="sigla">Sigla:</label>
+        <input type="text" id="sigla" name="sigla" required>
+        <label for="descricao">descrição:</label>
+        <input type="text" id="descricao" name="descricao" required>
+        <label for="coordenador">Coordenador</label>
+        <input type="text" id="coordenador" name="coordenador" required>
+        <button type="submit">Salvar</button>
+      </form>
+    </div>
+  </div>
+
+
+  <script src="cursos.js"></script>
+
+</body>
+</html>
