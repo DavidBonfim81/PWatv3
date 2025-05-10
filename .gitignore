@@ -1,3 +1,51 @@
+# Node modules
 node_modules/
+
+# Logs
+logs
 *.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Ambiente
 .env
+.env.test
+.env.local
+
+# Diretórios temporários
+tmp/
+temp/
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+
+# IDEs e editores
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Testes de cobertura
+coverage/
+
+# Compilados ou empacotados
+dist/
+build/
+
+# Arquivos de backup
+*.bak
+*.old
+*.swp
+*.swo
+
+# Banco de dados local (se estiver usando SQLite ou outros)
+*.sqlite
+*.sqlite3
+*.db
+
+# Pastas de upload temporário (se tiver)
+uploads/
+
+# Arquivo .gitignore em si é útil manter, então não o ignore :)

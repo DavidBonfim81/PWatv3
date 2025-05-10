@@ -1,5 +1,7 @@
 //array dos cursos
 let cursos = [];
+let novoCodigo = null;
+
 //let curso = null
 //variavel para o id atual
 let currentCursoId = null;
@@ -17,10 +19,15 @@ function closeModal(modalId) {
 // Listener para o botão addCurso, vai chamar a openModal()
 const btAddCurso = document.getElementById('addCurso');
 btAddCurso.addEventListener('click', function() {
+  novoCodigo = cursos.length > 0
+  ? Math.max(...cursos.map(c => parseInt(c.codigo))) + 1
+  : 1;
     document.getElementById('cursoForm').reset();
+    document.getElementById('codigo').value = novoCodigo;
     openModal('cursoModal');
   }); 
-  
+ 
+ 
   // Listener para fechar modais
   document.querySelectorAll('.close').forEach(function(closeBtn) {
     closeBtn.addEventListener('click', function() {
@@ -60,6 +67,7 @@ function renderCursos() {
 function editCurso(index) {
   const curso = cursos[index];
   //document.getElementById('cursoId').value = curso.id; // <-- Aqui
+  document.getElementById('cursoForm').reset();
 
   document.getElementById('codigo').value = curso.codigo;
   document.getElementById('nomeCurso').value = curso.nomeCurso;
@@ -87,6 +95,7 @@ function deleteCurso(index) {
     })
     .then(dados => {
       console.log(dados);
+      renderCursos();
       // Atualize a interface do usuário aqui, se necessário
     })
 
@@ -160,7 +169,7 @@ function addCurso(curso) {
 cursoForm.addEventListener('submit', function(e) {
   e.preventDefault();
 
-  const codigo = document.getElementById('codigo').value;
+  let codigo = document.getElementById('codigo').value;
   const nomeCurso = document.getElementById('nomeCurso').value;
   const sigla = document.getElementById('sigla').value;
   const descricao = document.getElementById('descricao').value;
@@ -168,10 +177,10 @@ cursoForm.addEventListener('submit', function(e) {
 
   const curso = { codigo, nomeCurso, sigla, descricao, coordenador };
 
-  const cursoExistente = cursos.find(c => String(c.id) === String(codigo));
+  const cursoExistente = cursos.find(c => String(c.codigo) === String(codigo));
 
   if (cursoExistente) {
-    // Editar curso existente (PUT)
+    // PUT
     fetch(`http://localhost:3000/cursos/${codigo}`, {
       method: 'PUT',
       headers: {
@@ -186,9 +195,21 @@ cursoForm.addEventListener('submit', function(e) {
       renderCursos();
     });
   } else {
-    // Novo curso (POST)
-    addCurso(curso);
-    closeModal('cursoModal');
+    // POST com novoCodigo
+    curso.codigo = novoCodigo;
+    fetch('http://localhost:3000/cursos', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(curso)
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Curso adicionado:', data);
+      closeModal('cursoModal');
+      renderCursos();
+    });
   }
 });
 renderCursos();
