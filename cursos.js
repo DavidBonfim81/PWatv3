@@ -1,7 +1,5 @@
 //array dos cursos
 let cursos = [];
-let novoCodigo = null;
-
 //let curso = null
 //variavel para o id atual
 let currentCursoId = null;
@@ -85,8 +83,8 @@ function deleteCurso(index) {
   if (confirm("Tem certeza que deseja excluir este curso?")) {
     const curso = cursos[index];
     const id = curso.id;
-    console.log(`Enviando requisição DELETE para /cursos/${id}`);
-    fetch(`http://localhost:3000/cursos/${id}`, {
+    console.log(`Enviando requisição DELETE para /cursos/${index}`);
+    fetch(`http://localhost:3000/cursos/${index}`, {
       method: 'DELETE'
     })
     .then(response => {
